@@ -21,6 +21,7 @@ int MatrixChain(int *p, int n) {
 	}
 	int result = lookup(p, m, 1, n);
 
+	cout << "m matrix: " << endl;
 	for (int i = 0; i < n + 1; ++i) {
 		for (int j = 0; j < n + 1; ++j) {
 			cout << m[i][j] << setw(10);
@@ -53,11 +54,28 @@ int lookup(int* p, int** m, int i, int j) {
 	return q;
 }
 
+void fprint(int **s, int i, int j) {
+	if (i == j) {
+		cout << "A" << i;
+		return;
+	}
+	cout << "(";
+	fprint(s, i, s[i][j]);
+	fprint(s, s[i][j] + 1, j);
+	cout << ")";
+	//return;
+}
+
 // bottom up
 int MatrixChain2(int *p, int n) {
-	int **m = new int*[n + 1];
+	int** m = new int*[n + 1];
 	for (int i = 0; i < n + 1; ++i) {
 		m[i] = new int[n + 1];
+	}
+
+	int** s = new int*[n + 1];
+	for (int i = 0; i < n + 1; ++i) {
+		s[i] = new int[n + 1];
 	}
 
 	for (int i = 0; i < n + 1; ++i) {
@@ -67,27 +85,52 @@ int MatrixChain2(int *p, int n) {
 	for (int l = 2; l < n + 1; ++l) {
 		for (int i = 1; i < n - l + 2; ++i) {
 			int j = i + l - 1;
-			int q = 1e+8;
+			//int q = 1e+8;
+			m[i][j] = 1e+8;
 			for (int k = i; k < j; ++k) {
-				q = min(q, m[i][k] + m[k + 1][j] + p[i - 1]*p[k]*p[j]);
+				int q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j];
+				if (q < m[i][j]) {
+					m[i][j] = q;
+					s[i][j] = k;
+				}
+				//q = min(q, m[i][k] + m[k + 1][j] + p[i - 1]*p[k]*p[j]);
 			}
-			m[i][j] = q;
+			//m[i][j] = q;
 		}
 	}
 
+	cout << "m matrix: " << endl;
 	for (int i = 0; i < n + 1; ++i) {
 		for (int j = 0; j < n + 1; ++j) {
 			cout << m[i][j] << setw(10);
 		}
 		cout << endl;
 	}
+	cout << endl;
 
+	cout << "s matrix: " << endl;
+	for (int i = 0; i < n + 1; ++i) {
+		for (int j = 0; j < n + 1; ++j) {
+			cout << s[i][j] << setw(10);
+		}
+		cout << endl;
+	}
+
+	cout << "print parenthesization: " ;
+	fprint(s, 1, n);
+	cout << endl;
+	
 	int result = m[1][n];
 
 	for (int i = 0; i < n + 1; ++i) {
 		delete[] m[i];
 	}
 	delete[] m;
+
+	for (int i = 0; i < n + 1; ++i) {
+		delete[] s[i];
+	}
+	delete[] s;
 
 	return result;
 }
@@ -96,6 +139,7 @@ int main() {
 	cout << "Matrix parenthesization problem" << endl;
 	int p[] = { 30,35,15,5,10,20,25 };
 	cout << "result: "<<MatrixChain(p, (std::size(p)-1) ) << endl;
+	cout << endl;
 	cout << "result2: " << MatrixChain2(p, (std::size(p) - 1)) << endl;
 	// expected result: 15125
 
