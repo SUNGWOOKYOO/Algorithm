@@ -16,10 +16,12 @@ public:
 		if (i == j) {
 			//cout << "base case 1:" << endl;
 			c[i][j] = 0;
+			return 0;
 		}
 		else if ((j - i == 1) && match(word, i, j)) {
 			//cout << "base case 2:" << endl;
 			c[i][j] = 2;
+			return 2;
 		}
 		else if((j - i > 0)){
 			if (match(word, i, j)) {
@@ -88,7 +90,7 @@ public:
 int main(){
 	cout << "Enter input DNA seq: ";
 	string word = "tatagcat";
-	cin >> word;
+	//cin >> word;
 
 	Solution sol;
 	int result = sol.MaxKOI(word);

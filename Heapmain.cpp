@@ -28,6 +28,7 @@ public:
 		A[j] = temp;
 	}
 
+	// Build Max heap through Divide and Conquer approach 
 	void make_heap(int i) {
 		cout << "make_heap(" << i << ")  ";
 

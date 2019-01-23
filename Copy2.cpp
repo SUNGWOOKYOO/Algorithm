@@ -22,12 +22,12 @@ public:
 
 int main() {
 	// generate an instance
-	C* c1 = new C();
+	C* c1 = new C(); // expected result : 147
 	cout << "\n";
 	// generate and Copy an instance 
-	C d(*c1);
+	C d(*c1); // expected result : 149
 	cout << "\n";
-	delete c1;
+	delete c1; // // expected result : 852
 	cout << "\n";
-	return 0;
+	return 0; // expected result : 852
 }
