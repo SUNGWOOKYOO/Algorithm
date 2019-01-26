@@ -18,6 +18,16 @@ void Activity(vector<int>& s, vector<int>& f, int k, int n, vector<string>& Aset
 
 	return;
 }
+void Activity_iterative(vector<int>& s, vector<int>& f, int n, vector<string>& Aset) {
+	Aset.push_back("a1");
+	int k = 1;
+	for (int m = 2; m <= n; ++m) {
+		if (s[m] >= f[k]) {
+			Aset.push_back("a" + std::to_string(m));
+			k = m;
+		}
+	}
+}
 
 int main() {
 	vector<int> s,f;
@@ -60,6 +70,12 @@ int main() {
 		cout << a << " ";
 	}cout << endl;
 
+	vector<string> Aset2;
+	Activity_iterative(s, f, n, Aset2);
+
+	for (string a : Aset2) {
+		cout << a << " ";
+	}cout << endl;
 
 	return 0;
 }
