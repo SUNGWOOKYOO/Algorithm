@@ -177,17 +177,19 @@ list<int> Graph::TopoSort() {
 		}
 	}
 	while (!S.empty()) {
-		L.push_back(S.top());
-		S.pop();
+		L.push_back(S.top());		S.pop();
 	}
 	return L;
 }
 void Graph::SCC() {
+
+	cout << "Topological sort ... " << endl;
+	list<int> L = TopoSort();
+
 	cout << "transpose ..." << endl;
 	Graph gt = getTranspose();
 	vector<bool> visited(NumofVertices, false);
-	cout << "Topological sort ... " << endl;
-	list<int> L = TopoSort();
+
 	cout << "DFS for gt ... " << endl;
 	int p = 0;
 	for (auto it = L.begin(); it != L.end(); ++it) {
