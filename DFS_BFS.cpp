@@ -44,7 +44,7 @@ public:
 
 void Graph::DFSUtil(int v, vector<bool>& visited) {
 	// S.pop 
-	// finish timing 
+	// update v.d timing 
 	cout << v << " ";
 	visited[v] = true;
 
@@ -54,6 +54,9 @@ void Graph::DFSUtil(int v, vector<bool>& visited) {
 			DFSUtil(*it, visited);
 		}
 	}
+
+	// update v.f set timing 
+	return;
 }
 void Graph::DFS_recursive(int s) {
 	vector<bool> visited(NumofVertices, false);
@@ -71,7 +74,7 @@ void Graph::DFS(int s) {
 	while (!S.empty()) {
 		int v = S.top(); S.pop();
 
-		// finish timing 
+		// update v.d timing
 		cout << v << " ";
 		visited[v] = true;
 		
@@ -132,7 +135,7 @@ void Graph::BFS(int v) {
 	while (!Q.empty()) {
 		int v = Q.front();  Q.pop();
 
-		// finish timing 
+		// update  v.d timing
 		cout << v << " ";
 
 		for (auto it = adj[v].begin(); it != adj[v].end(); ++it) {
