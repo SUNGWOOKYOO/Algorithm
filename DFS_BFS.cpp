@@ -192,7 +192,7 @@ void Graph::SCC() {
 	int p = 0;
 	for (auto it = L.begin(); it != L.end(); ++it) {
 		if (visited[*it] == false) {
-			cout << "SCC["<<p<<"] ... ";
+			cout << "SCC["<<p++<<"] ... ";
 			gt.DFSUtil(*it, visited);
 			cout << endl;
 		}
@@ -272,12 +272,24 @@ push 1 node
 DFS search starts at 2...
 push 3 node
 push 2 node
-push 3 node
 DFS search starts at 4...
 push 4 node
 DFS search starts at 5...
 push 5 node
-5 4 3 2 3 1 0
+5 4 2 3 1 0
+Result of SCC
+transpose ...
+Topological sort ...
+DFS search starts at 0...
+push 1 node
+push 2 node
+push 4 node
+push 3 node
+push 0 node
+DFS for gt ...
+SCC[0] ... 0 1 2
+SCC[1] ... 3
+SCC[2] ... 4
 	*/
 	return 0;
 }
