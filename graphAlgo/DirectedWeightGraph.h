@@ -35,7 +35,7 @@ public:
 		// by doing so,
 		// later on, if we pop the stack until being empty,
 		// we can obtain a list of nodes with the ending time in descending order.
-		cout << "push " << v << " node" << endl;
+		//cout << "push " << v << " node" << endl;
 		S.push(v);
 	}
 	list<int> TopoSort() {
@@ -46,7 +46,7 @@ public:
 		// Let assume that the node with small number has a higher priority when DFS search  
 		for (int i = 0; i < NumOfvertices; ++i) {
 			if (visited[i] == false) {
-				cout << "DFS search starts at " << i << "... " << endl;
+				//cout << "DFS search starts at " << i << "... " << endl;
 				topoDFS(S, visited, i);
 			}
 		}
@@ -61,7 +61,7 @@ public:
 		// O(V+E)
 		for (int i = 0; i < NumOfvertices; ++i) {
 			for (auto it = adj[i].begin(); it != adj[i].end(); ++it) {
-				cout << "(" << i << ", " << (*it).second << "," << (*it).first << ")" << endl;
+				cout << "(" << i << ", " << (*it).second << "," << (*it).first << " )" << endl;
 			}
 		}
 	}
