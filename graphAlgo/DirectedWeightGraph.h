@@ -61,7 +61,7 @@ public:
 		// O(V+E)
 		for (int i = 0; i < NumOfvertices; ++i) {
 			for (auto it = adj[i].begin(); it != adj[i].end(); ++it) {
-				cout << "(" << i << ", " << (*it).second << "," << (*it).first << " )" << endl;
+				cout << "(" << i << ", " << (*it).second << ", " << (*it).first << ")" << endl;
 			}
 		}
 	}
