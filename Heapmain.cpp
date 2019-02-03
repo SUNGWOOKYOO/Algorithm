@@ -67,7 +67,7 @@ public:
 
 		if (largest != i) {
 
-			// T(n) = 2(2/n) + logn
+			// T(n) = 2T(2/n) + logn
 			// T(n) = O(n) algorithm 
 			heapify(largest);
 
