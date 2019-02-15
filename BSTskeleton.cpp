@@ -1,6 +1,6 @@
 #include <iostream>
+#include <stack>
 using namespace std;
-
 
 class Node {
 friend class BinarySearchTree;
@@ -27,6 +27,7 @@ public:
 	}
 
 	void deleteAllNodes(Node* current) {
+		// postorder traversal 
 		if (current == NULL) return;
 		deleteAllNodes(current->left);
 		deleteAllNodes(current->right);
@@ -168,6 +169,7 @@ public:
 				predecessor = predecessor->left;
 			}
 			
+			//cout << "debug:" << predecessor->data << endl;
 			cur->data = predecessor->data;
 			if (predecessor->right != NULL) {
 				if (prev_predessor->left == predecessor) {
@@ -182,7 +184,9 @@ public:
 	}
     
     void print() {
-        Node *current = root;
+		// post order print iterative version 
+		cout << "inorder print iterative version:  ";
+		Node *current = root;
         while(current != NULL) {
             if(current->left == NULL) {
                 cout << current->data << " ";
@@ -210,11 +214,56 @@ public:
     }
 
 	void printallnodes(Node* current) {
+		// postorder
 		if (current == NULL) return;
 		printallnodes(current->left);
 		printallnodes(current->right);
 		cout << "data: " << current->data << endl;
 		return;
+	}
+
+	// https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/
+	void inorderStack() {
+		// Base Case 
+		if (root == NULL)
+			return;
+
+		stack<Node*> s;
+		Node* cur = this->root;
+		cout << "inorder print using stack version:  ";
+		while (cur != NULL || s.empty() == false) {
+			// Reach the left most Node of the cur Node 
+			while (cur != NULL) {
+				s.push(cur);
+				cur = cur->left;
+			}
+			cur = s.top(); s.pop();
+			cout << cur->data << " ";
+
+			cur = cur->right;
+		}
+		cout << endl;
+	}
+
+	// https://www.geeksforgeeks.org/iterative-preorder-traversal/
+	void preorderStack() {
+		// Base Case 
+		if (root == NULL)
+			return;
+
+		cout << "preorder print using stack version:  ";
+		stack<Node*> s;
+		//auto cur = this->root;
+		s.push(root);
+		while (s.empty() == false) {
+			auto cur = s.top(); s.pop();
+			cout << cur->data << " ";
+			if (cur->right != NULL)
+				s.push(cur->right);
+			if (cur->left != NULL)
+				s.push(cur->left );
+		}
+		cout << endl;
 	}
 
 private:
@@ -225,7 +274,7 @@ private:
 
 int main(int argc, char *argv[]) {
 	BinarySearchTree bst;
-
+	
 	bst.insert(3);
 	bst.insert(5);
 	bst.insert(2);
@@ -246,5 +295,33 @@ int main(int argc, char *argv[]) {
 	
 	bst.print(); cout << endl;
 
+
+	bst.inorderStack();
+	bst.preorderStack();
+	
+	/*
+			 3
+		   /  \
+		  2    6
+		 /    /  \
+	   1	 4    8
+			     / \ 
+				7  10
+inorder print iterative version:  1 2 3 4 5 6 7 8 10
+=========== remove =====================
+case3
+=========== remove end =================
+inorder print iterative version:  1 2 3 4 6 7 8 10
+inorder print using stack version:  1 2 3 4 6 7 8 10
+preorder print using stack version:  3 2 1 6 4 8 7 10
+delete: 1
+delete: 2
+delete: 4
+delete: 7
+delete: 10
+delete: 8
+delete: 6
+delete: 3
+	*/
     return 0;
 }
