@@ -17,7 +17,7 @@ void dijkstra(Graph& G, int src) {
 
 	while (!pq.empty()) {
 		int u = pq.top().second; pq.pop();
-		inS[u] = true;
+		inS[u] = true; // vertices in inS set have already shortest path distance
 		for (auto it = G.adj[u].begin(); it != G.adj[u].end(); ++it) {
 			int v = (*it).second;
 			int weight = (*it).first;
