@@ -1,14 +1,15 @@
 #include <iostream>
-#include <array>
-#include <string>
+#include <iomanip>
 using namespace std;
 
-int main() {
-	array <string, 2> strarr = {string("aaa"),"bbb"};
+void func() {
+	static int a = 0;
+	a++;
+	cout << a << setw(5);
+}
 
-	for (auto s: strarr) {
-		cout << s << endl;
-	}
-
-	return 0;
+void main() {
+	for (int i = 0; i < 10; ++i) {
+		func();
+	}cout << endl;
 }
