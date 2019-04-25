@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include <tuple>
+// #include <algorithm>
 using namespace std;
 
 auto max_subarray(int a[], int length) {
@@ -15,6 +16,8 @@ auto max_subarray(int a[], int length) {
 	int this_sum = 0;
 	for (int j = 0; j < n; ++j) {
 		this_sum += a[j];
+		// max_sum = max(max_sum, this_sum);
+		// if (this_sum < 0) this_sum = 0;
 		if (this_sum > max_sum) {
 			max_sum = this_sum;
 			end = j;
@@ -23,6 +26,7 @@ auto max_subarray(int a[], int length) {
 			this_sum = 0;
 			start = j + 1;
 		}
+
 	}
 
 	return make_tuple(max_sum, start, end);
