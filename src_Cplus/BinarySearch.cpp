@@ -23,7 +23,7 @@ int BS2(int *a, int n, int k) {
 	int mid = 0;
 	// suppose that a is a sorted array
 	while (i<=j) { // when i>j can be satisfied, the loop will end
-		mid = i + ((j - i) >> 1);
+		mid = i + ((j - i) >> 1); // i + (j - i)right-shifted by 1
 		if (a[mid] == k) // this case should be the top of the cases.
 			return mid;
 		else if (a[mid] > k)
