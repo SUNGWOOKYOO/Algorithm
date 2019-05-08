@@ -45,9 +45,12 @@ vector<Point>::iterator find(vector<Point>&a, Point point) {
 // referenece: https://www.cs.mcgill.ca/~cs251/ClosestPair/ClosestPairDQ.html
 // rf2: https://www.geeksforgeeks.org/closest-pair-of-points-onlogn-implementation/
 double CloestPairUntil(vector<Point>& p, int n) {
-	/*cout << "======= CloestPairUntil(p, " << n << ") ========" << endl;*/
+	//cout << "======= CloestPairUntil(p, " << n << ") ========" << endl;
 
 	// Base cases 
+	if (n == 1) {
+		return MAXV;
+	}
 	if (n == 2) {
 		sort(p.begin(), p.end(), Comp(false));
 		/*cout << "p: ";
@@ -137,21 +140,23 @@ double CloestPairUntil(vector<Point>& p, int n) {
 	// low와 high 를 merge()하여 sorted list를 만든다.
 	*(p.end() - 1) = pivot;
 	std::merge(low.begin(), low.end(), high.begin(), high.end(), p.begin(), Comp(false));
-	//q1 = std::partition(p.begin(), p.end(), [pivot](Point em)->bool {return get<1>(em) > get<1>(pivot); });
 	auto f = [pivot](Point em)->bool {return get<1>(em) > get<1>(pivot); };
+	// find pivot index
 	for (q1 = p.begin(); f(*q1); q1++);
-	for (auto it = p.end() - 2; it != q1; --it) {
-		*(it + 1) = *it;
+	// shift 
+	if(q1 != p.end() - 1) {
+		for (auto it = p.end() - 2; it != q1; --it) {
+			*(it + 1) = *it;
+		}
+		*(q1 + 1) = *q1;
+		*q1 = pivot;
 	}
-	*(q1 + 1) = *q1;
-	*q1 = pivot;
 
 	/*cout << "chaged p: ";
 	for (auto o : p) {
 		print(o); cout << " ";
 	}cout << endl;*/
 
-	// 최대 6개의 element로 이루어 지게 된다. 
 	vector<Point> strip;
 	for (int i = 0; i < n; i++) {
 		if (abs(get<0>(pivot) - get<0>(p[i])) < d)
@@ -171,10 +176,10 @@ double CloestPairUntil(vector<Point>& p, int n) {
 		print(o); cout << " ";
 	}cout << endl;*/
 
+	// O(n^2)
 	int strip_sz = strip.size();
 	for (int i = 0; i < strip_sz - 1; i++) {
-		// it takes constant time because of break condition 
-		for (int j = i + 1; j < strip_sz && get<1>(strip[j]) - get<1>(strip[i]) < d; j++)
+		for (int j = i + 1; j < strip_sz && abs(get<1>(strip[i]) - get<1>(strip[j])) < d; j++)
 			d = min(d, distance(strip[i], strip[j]));
 	}
 	//cout << "update d: " << d << endl;
