@@ -156,18 +156,34 @@ int main() {
 	}cout << endl;
 	*/
 
-	int n;
-	cout << "Enter Input size: ";
-	cin >> n;
-	int *p = new int[n];
+	//int n;
+	//cout << "Enter Input size: ";
+	//cin >> n;
+	//int *p = new int[n];
 
-	srand(unsigned int(time(0)));
-	
+	//srand(unsigned int(time(0)));
+	//
+	//for (int i = 0; i < n; ++i) {
+	//	// [-5000, 5000] random 
+	//	p[i] = rand() % (5000 - (-5000) + 1) - 5000 ;
+	//	cout << p[i] << " ";
+	//}cout << endl;
+
+	freopen("input.txt", "r", stdin);
+	cout << "Enter input size n : ";
+	int n;
+	cin >> n;
+	cout << endl;
+	int* p = new int[n];
+	cout << "Enter input seq: ";
 	for (int i = 0; i < n; ++i) {
-		// [-5000, 5000] random 
-		p[i] = rand() % (5000 - (-5000) + 1) - 5000 ;
-		cout << p[i] << " ";
+		cin >> p[i];
 	}cout << endl;
+	/*
+	input.txt
+	7
+	1 19 15 13 5 30 59
+	*/
 
 	auto start = chrono::system_clock::now();
 	cout << "	>> 0 approach result : " << dist_naive(p, n) << endl;
