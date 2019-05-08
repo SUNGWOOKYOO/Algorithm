@@ -176,11 +176,13 @@ double CloestPairUntil(vector<Point>& p, int n) {
 		print(o); cout << " ";
 	}cout << endl;*/
 
-	// O(n^2)
+	// O(n) guaranteed 
 	int strip_sz = strip.size();
 	for (int i = 0; i < strip_sz - 1; i++) {
-		for (int j = i + 1; j < strip_sz && abs(get<1>(strip[i]) - get<1>(strip[j])) < d; j++)
+		// abs(get<1>(strip[i]) - get<1>(strip[j])) < d 를 만족하는 j는 6개를 넘지 못한다.
+		for (int j = i + 1; j < strip_sz && abs(get<1>(strip[i]) - get<1>(strip[j])) < d; j++) {
 			d = min(d, distance(strip[i], strip[j]));
+		}
 	}
 	//cout << "update d: " << d << endl;
 	return d;
