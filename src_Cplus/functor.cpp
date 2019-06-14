@@ -5,7 +5,7 @@
 #include <ctime>
 using namespace std;
 
-#if 0
+#if 1
 
 bool GT3(const std::string& s) {
 	return s.size() >= 3;
@@ -13,6 +13,15 @@ bool GT3(const std::string& s) {
 bool GT6(const std::string& s) {
 	return s.size() >= 6;
 }
+class GT_cls {
+public:
+	GT_cls(std::size_t b):bound(b){}
+	bool operator()(const std::string& s) {
+		return s.size() >= bound;
+	}
+private:
+	std::size_t bound;
+};
 
 class larger_than {
 public:
@@ -23,16 +32,16 @@ private:
 };
 
 int main() {
+	//std::vector<std::string> words;
 
-	/*
-	std::vector<std::string> words;
-
-	words.push_back("Programming"); words.push_back("Methodlogy");
-	words.push_back("is");	words.push_back("easy");
-	words.push_back("or");	words.push_back("not easy");
-	std::cout << count_if(words.begin(), words.end(), GT3) << std::endl;
-	std::cout << count_if(words.begin(), words.end(), GT6) << std::endl;
-	*/
+	//words.push_back("Programming"); words.push_back("Methodlogy");
+	//words.push_back("is");	words.push_back("easy");
+	//words.push_back("or");	words.push_back("not easy");
+	////std::cout << count_if(words.begin(), words.end(), GT3) << std::endl;
+	////std::cout << count_if(words.begin(), words.end(), GT6) << std::endl;
+	//std::cout << count_if(words.begin(), words.end(), GT_cls(3)) << std::endl;
+	//std::cout << count_if(words.begin(), words.end(), GT_cls(6)) << std::endl;
+	
 	std::vector<int> vec;
 	srand((unsigned int)time(0));
 	for (int i = 0; i < 20; i++)
@@ -55,7 +64,7 @@ int main() {
 	cout << endl;
 }
 
-#elif 1
+#elif 0
 
 //implement your own functors and use it in quicksort
 class smaller_than {	//you can change the name

@@ -46,8 +46,10 @@ vector<Point>::iterator find(vector<Point>&a, Point point) {
 // rf2: https://www.geeksforgeeks.org/closest-pair-of-points-onlogn-implementation/
 double CloestPairUntil(vector<Point>& p, int n) {
 	//cout << "======= CloestPairUntil(p, " << n << ") ========" << endl;
-
 	// Base cases 
+	if (n == 0) {
+		return MAXV;
+	}
 	if (n == 1) {
 		return MAXV;
 	}
